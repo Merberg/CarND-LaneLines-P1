@@ -21,7 +21,7 @@ The goals / steps of this project are the following:
 My lane detection pipeline consisted of the following steps:
 1. Change the image to grayscale to reduce the information.
 2. Apply Gaussian smoothing to blur the edges of the grayscale image.
-3. Determine the Otsu threshold of the image and use it to run Canny edge detection on the blurred image.
+3. Run Canny edge detection on the blurred image using low and high thresholds calculated with Otsu's algorithm.
 4. Mask the region of interest to eliminate the sky and the peripheral objects.
 5. Run the Hough transform to determine the lines within the ROI.
 6. Rerun the ROI mask to remove extrapolated line data outside of the region.
