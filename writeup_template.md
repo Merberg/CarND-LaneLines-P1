@@ -1,11 +1,5 @@
-# **Finding Lane Lines on the Road** 
-
-## Writeup Template
-
-### You can use this file as a template for your writeup if you want to submit it as a markdown file. But feel free to use some other method and submit a pdf if you prefer.
-
+# **Finding Lane Lines on the Road**
 ---
-
 **Finding Lane Lines on the Road**
 
 The goals / steps of this project are the following:
@@ -16,7 +10,7 @@ The goals / steps of this project are the following:
 
 ### Reflection
 
-### 1. My pipeline and draw_lines() function.
+### 1. The pipeline and draw_lines() function.
 
 My lane detection pipeline consisted of the following steps:
 1. Change the image to grayscale to reduce the information.
@@ -32,14 +26,15 @@ My lane detection pipeline consisted of the following steps:
 In order to draw a single line on the left and right lanes, I modified the draw_lines() function by separating then collecting the data points using the slope of the lines.  I then used the polyfit function to calculate the best fit line, which was drawn on the parameterized image.
 
 
-### 2. Identify potential shortcomings with your current pipeline
+### 2. Pipeline Shortcomings
 
 This method suffers from numerous shortcomings:
-- The extrapolation method draws incorrect lane markers with larger breaks in the lines or sharper curves.  Correcting to a higher order polynomial might help but would introduce error with straight lines.
+- The original images have not been corrected for shadows or intense light changes.
+- The extrapolation method draws incorrect lane markers with larger breaks in the lines or sharper curves.  In addition, there are no boundaries surrounding proper placement of the lines.
 - The region of interest is arbitrary.  Indeed, with the different camera position and field of view used for the challenge video, the ROI mask breaks down.
-- The six pipeline steps would need to be heavily optimized to run real-time in a vehicle.
+- The numerous pipeline steps would need to be heavily optimized to run real-time in a vehicle.
 
 
-### 3. Suggest possible improvements to your pipeline
+### 3. Possible Pipeline Improvements
 
-A possible improvement would be to use a camera with known characteristics in a fixed position.  This information would feed into a calculation of the region of interest.  In addition, a running calculation of the width of the lane could be used to set boundary conditions for restricting lane placement.
+A possible improvement would be to use a camera with known characteristics in a fixed position.  This information would feed into a calculation of the region of interest.  A running calculation of the width of the lane could be used to set boundary conditions for restricting lane placement.  I believe the most substantial improvements could be made by replacing yellow lane markers with white prior to converting to grayscale and working to minimize the impact of shadows.
