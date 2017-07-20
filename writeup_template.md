@@ -25,6 +25,7 @@ My lane detection pipeline consisted of the following steps:
 
 In order to draw a single line on the left and right lanes, I modified the draw_lines() function by separating then collecting the data points using the slope of the lines.  I then used the polyfit function to calculate the best fit line, which was drawn on the parameterized image.
 
+Overall I dislike empirically derived thresholds/settings.  Therefore I turned to Google to help find alternatives for setting Canny thresholds. See [Application of Otsu Method In Canny Operator](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.402.5899&rep=rep1&type=pdf)
 
 ### 2. Pipeline Shortcomings
 
@@ -37,4 +38,8 @@ This method suffers from numerous shortcomings:
 
 ### 3. Possible Pipeline Improvements
 
-A possible improvement would be to use a camera with known characteristics in a fixed position.  This information would feed into a calculation of the region of interest.  A running calculation of the width of the lane could be used to set boundary conditions for restricting lane placement.  I believe the most substantial improvements could be made by replacing yellow lane markers with white prior to converting to grayscale and working to minimize the impact of shadows.
+A possible improvement would be to use a camera with known characteristics in a fixed position.  In MATLAB the lane finding demonstrations use this camera information to convert images to birds-eye views.  This restricts the region of interest to a planer surface, eliminating noise introduced by walls, barriers, and other straight faces.
+
+The pipeline is also lacking in error/boundary checks and course corrections.  A running calculation of the width of the lane could be used to set boundary conditions for restricting lane placement.  Or averaging of the slopes of the Hough lines could be weighted against the fitted line.
+
+I think substantial improvements could be made using image correction techniques (which are not my forte) for more robust edge detection: replacing yellow lane markers with white prior to converting to grayscale or working to minimize the impact of shadows.  However, looking at these sunny images always leads me to one thought; nothing defeats a lane detection algorithm like a snowstorm.
